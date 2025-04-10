@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.SQLOutput;
 
 public class D_ReadATLA {
 
@@ -22,7 +23,7 @@ public class D_ReadATLA {
 
     public void pull() throws ParseException {
         String output = "";
-        String jsonString="";
+        String jsonString = "";
         try {
 
             URL url = new URL("https://last-airbender-api.fly.dev/api/v1/characters"); /** Your API's URL goes here */
@@ -42,7 +43,7 @@ public class D_ReadATLA {
 
             System.out.println("Output from Server .... \n");
             while ((output = br.readLine()) != null) {
-                System.out.println(output);
+//                System.out.println(output);
                 jsonString += output;
             }
 
@@ -58,15 +59,44 @@ public class D_ReadATLA {
         // turn your string into a JSON object using a parser
         JSONParser parser = new JSONParser();
         JSONArray jsonArray = (JSONArray) parser.parse(jsonString);
-        System.out.println("JSON ARRAY: " + jsonArray);
+
+
+//        System.out.println("JSON ARRAY: " + jsonArray);
+
+        // print the name of every character
+
+//        JSONArray nameArray = (JSONArray) jsonObject.get("name");
+//        int n = nameArray.size();
+//        System.out.println("NAMES: ");
+//        for (int i = 0; i < n; i++) {
+//            String film = (String) nameArray.get(i);
+//            System.out.println(film);
+//        }
 
         /* TODO : print the allies of the first character in the JSON */
         // here is a line to get you started:
-        JSONObject character = (JSONObject) jsonArray.get(0); // 0 index is the first character
+
+        // print each ally on its own line
+
+//        System.out.println("ALLIES:");
+//        for (int i = 0; i < allies.size(); i++){
+//            String ally = (String) allies.get(i);
+//            System.out.println(ally);
+//        }
 
         /* TODO : print the "name" of every character in the jsonArray */
+        JSONObject character = (JSONObject) jsonArray.get(3); // 0 index is the first character
 
+        for (int q = 0; q < jsonArray.size(); q ++){
+            character = (JSONObject) jsonArray.get(q);
+            String name = (String) character.get("name");
+            System.out.println(name);
+        }
+//        JSONObject jsonObject = (JSONObject) jsonArray.get(0); // 0 index is the first character
+//        String name = (String) jsonObject.get("name");
+//        System.out.println(name);
 
     }
-
 }
+
+
